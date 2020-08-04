@@ -1,0 +1,16 @@
+.CardHolder{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    margin: 30px;
+    width: 20%;
+}
+Header{
+    min-width: 150px;
+}
+.CardHolderBody{
+    min-width: 150px;
+    min-height: 200px;
+    border: 1px solid black;
+    padding: 10px;
+}

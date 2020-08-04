@@ -1,0 +1,10 @@
+.AddTask{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.taskLabel{
+    padding:17px;
+    margin: 5px;
+    text-align: center;
+}
