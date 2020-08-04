@@ -42,7 +42,12 @@ createNewCard=(date) => {
         CardTitle:this.state.cardDetails.cardTitle,
         Status: this.state.cardDetails.statusName
     }
-    this.props.createNewCard(cardDetails)
+    if(this.props.isUpdate){
+        this.props.updateCardDetails(cardDetails)
+    }
+    else{
+        this.props.createNewCard(cardDetails)
+    }
 }
 
 onChange=(event)=>{

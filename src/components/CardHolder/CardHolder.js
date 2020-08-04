@@ -11,7 +11,7 @@ class CardHolder extends React.Component {
             </div>
             <div className="CardHolderBody">
                 {this.props.data.map((item) => (
-                    <KanbanCard updateCardDetails={() => this.props.updateCardDetails(item)} cardTitle={item.CardTitle} dueDate={item.Duedate} assignee={item.Assignee} />
+                    <KanbanCard updateCardDetails={(e) => this.props.updateCardDetails(item)} cardTitle={item.CardTitle} dueDate={item.Duedate} assignee={item.Assignee} />
                 ))
                 }
                 {/* <KanbanCard cardTitle="GST Filing Flow" dueDate="12/12/2020" assignee="Jon" />
