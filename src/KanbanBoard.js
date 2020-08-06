@@ -15,29 +15,34 @@ export class KanbanBoard extends Component {
         isUpdate:false,
         updateItem:{}
       }
-
   }
 
-  openTaskAdder(){
-    this.setState({openTaskAdderForm:true})
-  }
+  // openTaskAdder(){
+  //   this.setState({openTaskAdderForm:true})
+  // }
 
   handleOnAddItem=()=> {
-    this.setState((prevState, props) => ({
-      openTaskAdderForm:!prevState.openTaskAdderForm
-    }));    
+    this.setState({
+      openTaskAdderForm:true
+  });    
   }
 
   updateCard = (item) => {
-    console.log('update click -------')
     this.setState({
       updateItem: item,
-      isUpdate:true
+      isUpdate:true,
     })
   }
 
   updateCardDetails = (newCardDetails) => {
     this.props.updateCardDetails(this.state.updateItem,newCardDetails)
+  }
+
+  handleModal =() => {
+    this.setState({
+      openTaskAdderForm: false,
+      isUpdate: false
+    })
   }
 
   render() {
@@ -47,13 +52,15 @@ export class KanbanBoard extends Component {
         <CardHolder headerName="Planned" openModal={this.handleOnAddItem} data={this.props.Planned} updateCardDetails={this.updateCard} />
         <CardHolder headerName="Started" openModal={this.handleOnAddItem} data={this.props.Started} updateCardDetails={this.updateCard}/>
         <CardHolder headerName="Done" openModal={this.handleOnAddItem} data={this.props.Done} updateCardDetails={this.updateCard}/>
-        {(this.state.openTaskAdderForm || this.state.isUpdate) &&
+        {/* {(this.state.openTaskAdderForm || this.state.isUpdate) && */}
           <TaskAdderForm
             isUpdate={this.state.isUpdate}
             updateCardDetails={this.updateCardDetails}
             createNewCard={this.props.createNewCard}
+            isOpen={this.state.openTaskAdderForm || this.state.isUpdate}
+            handleModal={this.handleModal}
           />
-        }
+         {/* } */}
       </div>
     );
   }
