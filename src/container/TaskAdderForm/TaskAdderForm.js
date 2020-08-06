@@ -12,7 +12,14 @@ class TaskAdderForm extends Component{
                statusName:'',
                assigneeName:'',
                cardTitle:''
-            }
+            },
+            isOpen:props.isOpen
+        }
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps.isOpen !== this.props.isOpen){
+            this.setState({isOpen: this.props.isOpen})
         }
     }
 
@@ -42,13 +49,22 @@ createNewCard=(date) => {
         CardTitle:this.state.cardDetails.cardTitle,
         Status: this.state.cardDetails.statusName
     }
-    this.props.createNewCard(cardDetails)
+    if(this.props.isUpdate){
+        this.props.updateCardDetails(cardDetails)
+    }
+    else{
+        this.props.createNewCard(cardDetails)
+    }
 }
 
 onChange=(event)=>{
     let cardDetails={...this.state.cardDetails}
     cardDetails.cardTitle = event.target.value
     this.setState({cardDetails})
+}
+
+setOpen=()=> {
+    this.props.handleModal()
 }
 
     render(){
@@ -60,7 +76,9 @@ onChange=(event)=>{
                     statusList={this.state.statusList}
                     onInputChange={this.onInputChange}
                     createNewCard={this.createNewCard}
-                    onChange={this.onChange}/>
+                    onChange={this.onChange}
+                    setOpen = {this.setOpen}
+                    isOpen={this.state.isOpen}/>
                <h1>{JSON.stringify(this.state.statusWithAssigne)}</h1> 
             </div>
         )

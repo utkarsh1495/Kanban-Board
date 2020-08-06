@@ -6,9 +6,6 @@ let initialState = {
     Planned: getInitState().Planned,
     Started: getInitState().Started,
     Done: getInitState().Done,
-    // Planned: [],
-    // Started: [],
-    // Done: []
 }
 
 export default function CardDetailsReducer(state = initialState, action) {
@@ -19,8 +16,15 @@ export default function CardDetailsReducer(state = initialState, action) {
                 merge(newState, action.payload.CardDetails) : newState
             break;
         case Constants.ACTIONS.CREATE_NEW_CARD:
-            newState[action.payload.Status].push(action.payload)
+            newState[action.payload.Status].push({...action.payload, id: newState.Planned.length + newState.Started.length + newState.Done.length+1})
             break;
+        case Constants.ACTIONS.UPDATE_CARD:{
+            newState[action.payload.item.Status] = newState[action.payload.item.Status].filter(element => {
+                return element.id !== action.payload.item.id
+            });
+            newState[action.payload.cardDetails.Status].push({...action.payload.cardDetails, id:action.payload.item.id});
+            break;
+        }
         default:
             break
     }

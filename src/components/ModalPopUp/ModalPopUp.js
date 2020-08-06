@@ -51,11 +51,10 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 const ModalPopUp = (props) => {
-    const [open, setOpen] = React.useState(true);
+    //const [open, setOpen] = React.useState(true);
     const [selectedDate, selectedDateChange] = React.useState(new Date().toLocaleDateString());
     const handleClose = (event) => {
-      console.log(event);
-        setOpen(false);
+      props.setOpen(false);
     };
 
     const onDateChange = (date) => {
@@ -64,12 +63,12 @@ const ModalPopUp = (props) => {
 
     const handleSave = () => {
       props.createNewCard(selectedDate)
-      setOpen(false)
+      props.setOpen(false)
     }
 
     return (
         <div>
-            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+            <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={props.isOpen}>
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Modal title
         </DialogTitle>
